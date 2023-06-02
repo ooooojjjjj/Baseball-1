@@ -59,18 +59,13 @@ public:
         }
     }
 
-    Result Guess(string sInput)
+    bool IsAnswer(std::string& sInput)
     {
-        CheckInputValidity(sInput);
+        return sAnswer == sInput;
+    }
 
-        if (sAnswer == sInput)
-        {
-            return { true, 3, 0 };
-        }
-
-        int nStrikes = 0;
-        int nBalls = 0;
-
+    void CheckSBcount(string sInput, int& nStrikes, int& nBalls)
+    {
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -84,6 +79,20 @@ public:
                 }
             }
         }
+    }
+
+    Result Guess(string sInput)
+    {
+        Result stResult = { false, 0, 0 };
+
+        CheckInputValidity(sInput);
+
+        if (IsAnswer(sInput)) 
+            return { true, 3, 0 };
+
+        int nStrikes = 0;
+        int nBalls = 0;
+        CheckSBcount(sInput, nStrikes, nBalls);
 
         return { false, nStrikes, nBalls };
     }
