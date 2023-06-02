@@ -67,6 +67,25 @@ public:
         {
             return { true, 3, 0 };
         }
+
+        int nStrikes = 0;
+        int nBalls = 0;
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                if (sInput[i] == sAnswer[j])
+                {
+                    if (i == j)
+                        nStrikes++;
+                    else
+                        nBalls++;
+                }
+            }
+        }
+
+        return { false, nStrikes, nBalls };
     }
 
 private:
