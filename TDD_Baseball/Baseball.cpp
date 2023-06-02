@@ -2,9 +2,22 @@
 #include <stdexcept>
 
 using namespace std;
+
+struct Result
+{
+    bool bSolved;
+    int nStrikes;
+    int nBalls;
+};
+
 class Baseball
 {
 public:
+    explicit Baseball(const string& sAnswer)
+        : sAnswer(sAnswer)
+    {
+    }
+
     bool IsNumbers(string& sInput)
     {
         for (char cEach : sInput)
@@ -46,8 +59,16 @@ public:
         }
     }
 
-    void Guess(string sInput)
+    Result Guess(string sInput)
     {
         CheckInputValidity(sInput);
+
+        if (sAnswer == sInput)
+        {
+            return { true, 3, 0 };
+        }
     }
+
+private:
+    string sAnswer;
 };
